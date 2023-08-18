@@ -21,9 +21,38 @@ namespace SchuhLadenApp
         private string Anstellungszeit;
         private double Lohngehalt;
         private string UserStatus;
+        private string account;
+        private string password;
 
         // Constructor
         public User() { }
+        public User(string UserId, string name, string vorname, string strasse, string hausnummer, int plz, string anstellungszeit, double lohngehalt, string userStatus, string password, string account)
+        {
+            this.UserId = UserId;
+            this.Name = name;
+            this.Vorname = vorname;
+            this.Strasse = strasse;
+            this.Hausnummer = hausnummer;
+            this.Plz = plz;
+            this.Anstellungszeit = anstellungszeit;
+            this.Lohngehalt = lohngehalt;
+            this.UserStatus = userStatus;
+            this.account = account;
+            this.password = password;
+        }
+        public User(string name, string vorname, string strasse, string hausnummer, int plz, string anstellungszeit, double lohngehalt, string userStatus, string password, string account)
+        {
+            this.Name = name;
+            this.Vorname = vorname;
+            this.Strasse = strasse;
+            this.Hausnummer = hausnummer;
+            this.Plz = plz;
+            this.Anstellungszeit = anstellungszeit;
+            this.Lohngehalt = lohngehalt;
+            this.UserStatus = userStatus;
+            this.account = account;
+            this.password = password;
+        }
         public User(string UserId, string name, string vorname, string strasse, string hausnummer, int plz, string anstellungszeit, double lohngehalt, string userStatus)
         {
             this.UserId = UserId;
@@ -46,6 +75,11 @@ namespace SchuhLadenApp
             this.Anstellungszeit = anstellungszeit;
             this.Lohngehalt = lohngehalt;
             this.UserStatus = userStatus;
+        }
+        public User(string account, string password)
+        {
+            this.account = account;
+            this.password = password;
         }
 
         // Calculate the User ID
@@ -100,8 +134,10 @@ namespace SchuhLadenApp
                             string anstellungszeit = reader.GetString(6);
                             double lohngehalt = reader.GetDouble(7);
                             string userstatus = reader.GetString(8);
+                            string password = reader.GetString(9);
+                            string account = reader.GetString(10);
 
-                            User newUser = new User(userId, name, vorname, strasse, hausnummer, plz, anstellungszeit, lohngehalt, userstatus);
+                            User newUser = new User(userId, name, vorname, strasse, hausnummer, plz, anstellungszeit, lohngehalt, userstatus, password, account);
 
                             users.Add(newUser);
 
@@ -139,8 +175,8 @@ namespace SchuhLadenApp
 
             using (SQLiteConnection connection = databaseHelper.OpenConnection())
             {
-                string query = "INSERT INTO user(userid, name, vorname, strasse, hausnummer, plz, anstellungszeit, lohngehalt, userstatus) " +
-                    "VALUES (@userid, @name, @vorname, @strasse, @hausnummer, @plz, @anstellungszeit, @lohngehalt, @userstatus) ";
+                string query = "INSERT INTO user(userid, name, vorname, strasse, hausnummer, plz, anstellungszeit, lohngehalt, userstatus, password, account) " +
+                    "VALUES (@userid, @name, @vorname, @strasse, @hausnummer, @plz, @anstellungszeit, @lohngehalt, @userstatus, @password, @account) ";
 
                 using (SQLiteCommand command = new SQLiteCommand(query, connection))
                 {
@@ -153,6 +189,8 @@ namespace SchuhLadenApp
                     command.Parameters.AddWithValue("@anstellungszeit", this.getAnstellungsZeit());
                     command.Parameters.AddWithValue("@lohngehalt", this.getLohnGehalt());
                     command.Parameters.AddWithValue("@userstatus", this.getUserStatus());
+                    command.Parameters.AddWithValue("@password", this.getPassword());
+                    command.Parameters.AddWithValue("@account", this.getAccount());
 
                     command.ExecuteNonQuery(); // Execute the INSERT query
                 }
@@ -183,6 +221,23 @@ namespace SchuhLadenApp
             tbxTestInput.Text = user.ToString();*/
 
             return null;
+        }
+
+        // Log in Check
+        public bool checkUserCredentials(string account, string password)
+        {
+
+            List<User> users = retrieveUsersFromDb();
+
+            foreach (User user in users)
+            {
+                if(user.account == account && user.password == password)
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
 
         public void setUserId(string userId)
@@ -240,6 +295,16 @@ namespace SchuhLadenApp
             return this.UserStatus;
         }
 
+        public string getAccount()
+        {
+            return this.account;
+        }
+
+        public string getPassword()
+        {
+            return this.password;
+        }
+
         public void setName(string Name)
         {
             this.Name = Name;
@@ -275,6 +340,16 @@ namespace SchuhLadenApp
             this.UserStatus = UserStatus;
         }
 
+        public void setPassword(string password)
+        {
+            this.password = password;
+        }
+
+        public void setAccount(string account)
+        {
+            this.account = account;
+        }
+
         override
         public string ToString()
         {
@@ -287,7 +362,9 @@ namespace SchuhLadenApp
             this.Adresse + " " +
             this.Anstellungszeit + " " +
             this.Lohngehalt + " " +
-            this.UserStatus;
+            this.UserStatus + " " +
+            this.account + " " +
+            this.password;
         }
 
     }
