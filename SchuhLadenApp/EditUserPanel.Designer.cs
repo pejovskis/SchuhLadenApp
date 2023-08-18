@@ -31,7 +31,8 @@
             button1 = new Button();
             button2 = new Button();
             button3 = new Button();
-            showUsersList = new ListView();
+            showUsersGrid = new DataGridView();
+            ((System.ComponentModel.ISupportInitialize)showUsersGrid).BeginInit();
             SuspendLayout();
             // 
             // button1
@@ -42,6 +43,7 @@
             button1.TabIndex = 1;
             button1.Text = "edit";
             button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
             // 
             // button2
             // 
@@ -62,25 +64,27 @@
             button3.UseVisualStyleBackColor = true;
             button3.Click += button3_Click;
             // 
-            // showUsersList
+            // showUsersGrid
             // 
-            showUsersList.Location = new Point(12, 12);
-            showUsersList.Name = "showUsersList";
-            showUsersList.Size = new Size(776, 397);
-            showUsersList.TabIndex = 4;
-            showUsersList.UseCompatibleStateImageBehavior = false;
+            showUsersGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            showUsersGrid.Location = new Point(12, 12);
+            showUsersGrid.Name = "showUsersGrid";
+            showUsersGrid.RowTemplate.Height = 25;
+            showUsersGrid.Size = new Size(776, 397);
+            showUsersGrid.TabIndex = 4;
             // 
             // EditUserPanel
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
-            Controls.Add(showUsersList);
+            Controls.Add(showUsersGrid);
             Controls.Add(button3);
             Controls.Add(button2);
             Controls.Add(button1);
             Name = "EditUserPanel";
             Text = "EditUserPanel";
+            ((System.ComponentModel.ISupportInitialize)showUsersGrid).EndInit();
             ResumeLayout(false);
         }
 
@@ -88,6 +92,6 @@
         private Button button1;
         private Button button2;
         private Button button3;
-        private ListView showUsersList;
+        private DataGridView showUsersGrid;
     }
 }

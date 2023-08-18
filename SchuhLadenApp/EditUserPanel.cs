@@ -15,38 +15,7 @@ namespace SchuhLadenApp
         public EditUserPanel()
         {
             InitializeComponent();
-
-            showUsersList.View = View.Details;
-
-            showUsersList.Columns.Add("User Id", 100);
-            showUsersList.Columns.Add("Name", 100);
-            showUsersList.Columns.Add("Vorname", 100);
-            showUsersList.Columns.Add("Strasse", 100);
-            showUsersList.Columns.Add("Hausnummer", 100);
-            showUsersList.Columns.Add("Plz", 100);
-            showUsersList.Columns.Add("Anstellungszeit", 100);
-            showUsersList.Columns.Add("Lohngehalt", 100);
-            showUsersList.Columns.Add("Userstatus", 100);
-            showUsersList.Columns.Add("Account", 100);
-
-            List<User> userList = User.retrieveUsersFromDb();
-
-            foreach (User user in userList)
-            {
-                ListViewItem item = new ListViewItem(user.getUserId());
-                item.SubItems.Add(user.getUserId());
-                item.SubItems.Add(user.getName());
-                item.SubItems.Add(user.getVorname());
-                item.SubItems.Add(user.getStrasse());
-                item.SubItems.Add(user.getHausnummer());
-                item.SubItems.Add(user.getPlz().ToString());
-                item.SubItems.Add(user.getAnstellungsZeit());
-                item.SubItems.Add(user.getLohnGehalt().ToString());
-                item.SubItems.Add(user.getUserStatus());
-                item.SubItems.Add(user.getAccount());
-
-                showUsersList.Items.Add(item);
-            }
+            generateUserGridView();
 
         }
 
@@ -56,6 +25,55 @@ namespace SchuhLadenApp
             this.Hide();
             adminMenu.ShowDialog();
             this.Close();
+        }
+
+        // Generate the list
+        private void generateUserGridView()
+        {
+            // Set the DataGridView to be editable
+            showUsersGrid.ReadOnly = false;
+
+            // Create columns
+            showUsersGrid.Columns.Add("UserId", "User Id");
+            showUsersGrid.Columns.Add("Name", "Name");
+            showUsersGrid.Columns.Add("Vorname", "Vorname");
+            showUsersGrid.Columns.Add("Strasse", "Strasse");
+            showUsersGrid.Columns.Add("Hausnummer", "Hausnummer");
+            showUsersGrid.Columns.Add("Plz", "Plz");
+            showUsersGrid.Columns.Add("Anstellungszeit", "Anstellungszeit");
+            showUsersGrid.Columns.Add("Lohngehalt", "Lohngehalt");
+            showUsersGrid.Columns.Add("Userstatus", "Userstatus");
+            showUsersGrid.Columns.Add("Account", "Account");
+
+            List<User> userList = User.retrieveUsersFromDb();
+
+            foreach (User user in userList)
+            {
+                // Add a row for each user
+                showUsersGrid.Rows.Add(user.getUserId(), user.getName(), user.getVorname(), user.getStrasse(),
+                    user.getHausnummer(), user.getPlz(), user.getAnstellungsZeit(),
+                    user.getLohnGehalt(), user.getUserStatus(), user.getAccount());
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+            if (showUsersGrid.SelectedCells.Count > 0)
+            {
+                DataGridViewCell dataGridViewCell = showUsersGrid.SelectedCells[0];
+                object value = dataGridViewCell.Value;
+
+                editUsersListCell editUsersListCellForm = new editUsersListCell();
+                editUsersListCellForm.EditedValue = value.ToString(); // Pass the value to the form
+                DialogResult result = editUsersListCellForm.ShowDialog();
+
+                if (result == DialogResult.OK)
+                {
+                    dataGridViewCell.Value = editUsersListCellForm.EditedValue; // Or use editUsersListCellForm.EditedValue to get the edited value
+                }
+            }
+
         }
     }
 }
