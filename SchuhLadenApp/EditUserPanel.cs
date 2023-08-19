@@ -30,8 +30,6 @@ namespace SchuhLadenApp
         // Generate the list
         private void generateUserGridView()
         {
-            // Set the DataGridView to be editable
-            showUsersGrid.ReadOnly = false;
 
             // Create columns
             showUsersGrid.Columns.Add("UserId", "User Id");
@@ -58,21 +56,24 @@ namespace SchuhLadenApp
 
         private void button1_Click(object sender, EventArgs e)
         {
-
-            if (showUsersGrid.SelectedCells.Count > 0)
+            if (showUsersGrid.SelectedRows.Count > 0)
             {
-                DataGridViewCell dataGridViewCell = showUsersGrid.SelectedCells[0];
-                object value = dataGridViewCell.Value;
+                DataGridViewRow dataGridViewRow = showUsersGrid.SelectedRows[0];
 
-                editUsersListCell editUsersListCellForm = new editUsersListCell();
-                editUsersListCellForm.EditedValue = value.ToString(); // Pass the value to the form
-                DialogResult result = editUsersListCellForm.ShowDialog();
-
-                if (result == DialogResult.OK)
+                List<string> userInfo = new List<string>();
+                foreach (DataGridViewCell cell in dataGridViewRow.Cells)
                 {
-                    dataGridViewCell.Value = editUsersListCellForm.EditedValue; // Or use editUsersListCellForm.EditedValue to get the edited value
+                    userInfo.Add(cell.Value.ToString());
                 }
+
+                editUsersListCell editUsersListCellForm = new editUsersListCell(userInfo);
+                editUsersListCellForm.userInfo = userInfo;
+                editUsersListCellForm.ShowDialog();
             }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
 
         }
     }

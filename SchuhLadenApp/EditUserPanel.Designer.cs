@@ -53,6 +53,7 @@
             button2.TabIndex = 2;
             button2.Text = "save";
             button2.UseVisualStyleBackColor = true;
+            button2.Click += button2_Click;
             // 
             // button3
             // 
@@ -66,10 +67,13 @@
             // 
             // showUsersGrid
             // 
+            showUsersGrid.AllowUserToAddRows = false;
+            showUsersGrid.AllowUserToDeleteRows = false;
             showUsersGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             showUsersGrid.Location = new Point(12, 12);
             showUsersGrid.Name = "showUsersGrid";
             showUsersGrid.RowTemplate.Height = 25;
+            showUsersGrid.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             showUsersGrid.Size = new Size(776, 397);
             showUsersGrid.TabIndex = 4;
             // 

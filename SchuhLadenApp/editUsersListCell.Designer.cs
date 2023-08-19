@@ -30,11 +30,13 @@
         {
             tbxInEdit = new TextBox();
             btnSave = new Button();
+            gridCellEdit = new DataGridView();
+            ((System.ComponentModel.ISupportInitialize)gridCellEdit).BeginInit();
             SuspendLayout();
             // 
             // tbxInEdit
             // 
-            tbxInEdit.Location = new Point(306, 205);
+            tbxInEdit.Location = new Point(303, 85);
             tbxInEdit.Name = "tbxInEdit";
             tbxInEdit.Size = new Size(171, 23);
             tbxInEdit.TabIndex = 0;
@@ -49,15 +51,30 @@
             btnSave.UseVisualStyleBackColor = true;
             btnSave.Click += btnSave_Click;
             // 
+            // gridCellEdit
+            // 
+            gridCellEdit.AllowUserToAddRows = false;
+            gridCellEdit.AllowUserToDeleteRows = false;
+            gridCellEdit.AllowUserToOrderColumns = true;
+            gridCellEdit.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            gridCellEdit.Location = new Point(68, 174);
+            gridCellEdit.Name = "gridCellEdit";
+            gridCellEdit.RowTemplate.Height = 25;
+            gridCellEdit.SelectionMode = DataGridViewSelectionMode.CellSelect;
+            gridCellEdit.Size = new Size(653, 70);
+            gridCellEdit.TabIndex = 2;
+            // 
             // editUsersListCell
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(gridCellEdit);
             Controls.Add(btnSave);
             Controls.Add(tbxInEdit);
             Name = "editUsersListCell";
             Text = "editUsersListCell";
+            ((System.ComponentModel.ISupportInitialize)gridCellEdit).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -66,5 +83,6 @@
 
         private TextBox tbxInEdit;
         private Button btnSave;
+        private DataGridView gridCellEdit;
     }
 }

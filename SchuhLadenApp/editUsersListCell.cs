@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.Entity.Core.Common.CommandTrees.ExpressionBuilder;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -14,21 +15,71 @@ namespace SchuhLadenApp
     public partial class editUsersListCell : Form
     {
 
-        public string EditedValue
+        public List<string> userInfo { get; set; } = new List<string>();
+
+        public editUsersListCell(List<string> userInfo)
         {
-            get { return tbxInEdit.Text; }
-            set { tbxInEdit.Text = value; }
+            this.userInfo = userInfo;
+            InitializeComponent();
+            generateUserGridView();
         }
 
-        public editUsersListCell()
+        public void generateUserGridView()
         {
-            InitializeComponent();
+            // Create columns
+            gridCellEdit.Columns.Add("Name", "Name");
+            gridCellEdit.Columns.Add("Vorname", "Vorname");
+            gridCellEdit.Columns.Add("Strasse", "Strasse");
+            gridCellEdit.Columns.Add("Hausnummer", "Hausnummer");
+            gridCellEdit.Columns.Add("Plz", "Plz");
+            gridCellEdit.Columns.Add("Anstellungszeit", "Anstellungszeit");
+            gridCellEdit.Columns.Add("Lohngehalt", "Lohngehalt");
+            gridCellEdit.Columns.Add("Userstatus", "Userstatus");
+            gridCellEdit.Columns.Add("Account", "Account");
+
+            gridCellEdit.Rows.Add(userInfo[1], userInfo[2], userInfo[3], userInfo[4],
+                userInfo[5], userInfo[6], userInfo[7], userInfo[8], userInfo[9]);
+
         }
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            this.DialogResult = DialogResult.OK;
+
+            if (gridCellEdit.Rows.Count > 0)
+            {
+
+                DataGridViewRow row = gridCellEdit.Rows[0];
+
+                User user = getUserInfo(row);
+
+                tbxInEdit.Text = user.ToString();
+            }
+
+            EditUserPanel editUserPanel = new EditUserPanel();
+            this.Hide();
+            editUserPanel.Show();
             this.Close();
         }
+
+        private User getUserInfo(DataGridViewRow row)
+        {
+            string userid = row.Cells[0].Value.ToString();
+            string name = row.Cells[1].Value.ToString();
+            string vorname = row.Cells[2].Value.ToString();
+            string strasse = row.Cells[3].Value.ToString();
+            string hausnummer = row.Cells[4].Value.ToString();
+            int plz = Convert.ToInt32(row.Cells[5].Value.ToString());
+            string anstellungszeit = row.Cells[6].Value.ToString();
+            double lohngehalt = Convert.ToDouble(row.Cells[7].Value.ToString());
+            string userstatus = row.Cells[8].Value.ToString();
+            string password = row.Cells[9].Value.ToString();
+            string account = row.Cells[10].Value.ToString();
+
+            User user = new User(userid, name, vorname, strasse, hausnummer, plz,
+                anstellungszeit, lohngehalt, userstatus, password, account);
+
+            return user;
+        }
+
     }
 }
