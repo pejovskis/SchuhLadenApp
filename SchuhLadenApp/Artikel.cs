@@ -160,7 +160,7 @@ namespace SchuhLadenApp
 
             using (SQLiteConnection connection = databaseHelper.OpenConnection())
             {
-                string query = "UPDATE artikel SET name=@name, lieferant=@lieferant, preis=@preis, menge=@menge" +
+                string query = "UPDATE artikel SET name=@name, lieferant=@lieferant, preis=@preis, menge=@menge " +
                     "WHERE artikelid=@artikelid";
 
                 using (SQLiteCommand command = new SQLiteCommand(query, connection))

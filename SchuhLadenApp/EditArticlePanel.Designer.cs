@@ -36,10 +36,13 @@
             // 
             // articleGridView
             // 
+            articleGridView.AllowUserToAddRows = false;
+            articleGridView.AllowUserToDeleteRows = false;
             articleGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             articleGridView.Location = new Point(12, 12);
             articleGridView.Name = "articleGridView";
             articleGridView.RowTemplate.Height = 25;
+            articleGridView.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             articleGridView.Size = new Size(776, 393);
             articleGridView.TabIndex = 0;
             // 

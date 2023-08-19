@@ -22,7 +22,7 @@ namespace SchuhLadenApp
         {
 
             // Create columns
-            articleGridView.Columns.Add("Article Id", "Article Id\"");
+            articleGridView.Columns.Add("Articleid", "Articleid");
             articleGridView.Columns.Add("Name", "Name");
             articleGridView.Columns.Add("Lieferant", "Lieferant");
             articleGridView.Columns.Add("Preis", "Preis");

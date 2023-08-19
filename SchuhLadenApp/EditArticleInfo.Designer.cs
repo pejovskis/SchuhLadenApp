@@ -42,6 +42,7 @@
             articleShowGrid.RowTemplate.Height = 25;
             articleShowGrid.Size = new Size(707, 93);
             articleShowGrid.TabIndex = 0;
+            articleShowGrid.CellContentClick += articleShowGrid_CellContentClick;
             // 
             // btnUpdateArticle
             // 
