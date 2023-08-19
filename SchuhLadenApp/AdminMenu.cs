@@ -15,7 +15,6 @@ namespace SchuhLadenApp
         public AdminMenu()
         {
             InitializeComponent();
-            /*
             if (LoginPanel.LoggedInUser != null)
             {
                 lblLogedInUser.Text = LoginPanel.LoggedInUser.getStrasse();
@@ -24,7 +23,6 @@ namespace SchuhLadenApp
             {
                 lblLogedInUser.Text = "Not logged in";
             }
-            */
         }
 
         private void button1_Click(object sender, EventArgs e)

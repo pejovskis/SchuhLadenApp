@@ -19,7 +19,6 @@ namespace SchuhLadenApp
             string password = inPassword.Text;
 
             User user = new User(username, password);
-
             bool logInApproved = user.checkUserCredentials(username, password);
 
             if (!logInApproved)
@@ -29,7 +28,7 @@ namespace SchuhLadenApp
             }
             else
             {
-                LoggedInUser = user;
+                LoggedInUser = user.getFullUserCredentials(username, password);
                 AdminMenu adminMenu = new AdminMenu();
                 this.Hide();
                 adminMenu.ShowDialog();

@@ -284,6 +284,46 @@ namespace SchuhLadenApp
             return false;
         }
 
+        public User getFullUserCredentials(string account, string password)
+        {
+            DatabaseHelper databaseHelper = new DatabaseHelper();
+
+            using (SQLiteConnection connection = databaseHelper.OpenConnection())
+            {
+                string query = "SELECT * FROM user WHERE account=@account AND password=@password";
+
+                using (SQLiteCommand command = new SQLiteCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@account", account);
+                    command.Parameters.AddWithValue("@password", password);
+
+                    using (SQLiteDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            string userId = reader.GetString(0);
+                            string name = reader.GetString(1);
+                            string vorname = reader.GetString(2);
+                            string strasse = reader.GetString(3);
+                            string hausnummer = reader.GetString(4);
+                            int plz = reader.GetInt32(5);
+                            string anstellungszeit = reader.GetString(6);
+                            double lohngehalt = reader.GetDouble(7);
+                            string userstatus = reader.GetString(8);
+
+                            User user = new User(userId, name, vorname, strasse, hausnummer, plz, anstellungszeit, lohngehalt, userstatus, password, account);
+
+                            return user;
+                        }
+                    }
+                }
+                databaseHelper.CloseConnection(connection);
+            }
+
+            return null;
+        }
+
+
         public void setUserId(string userId)
         { 
             this.UserId = userId; 
