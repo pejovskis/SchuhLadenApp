@@ -24,7 +24,7 @@ namespace SchuhLadenApp
 
         private void EditArticleInfo_Load(object sender, EventArgs e)
         {
-            
+
         }
 
         public void generateArticleInfo()
@@ -38,7 +38,7 @@ namespace SchuhLadenApp
 
             DataGridViewRow row = new DataGridViewRow();
 
-            row.CreateCells(articleShowGrid, articleInfo[0], articleInfo[1], articleInfo[2], articleInfo[3], 
+            row.CreateCells(articleShowGrid, articleInfo[0], articleInfo[1], articleInfo[2], articleInfo[3],
                 articleInfo[4]);
 
             articleShowGrid.Rows.Add(row);

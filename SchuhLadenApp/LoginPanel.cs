@@ -4,6 +4,9 @@ namespace SchuhLadenApp
 {
     public partial class LoginPanel : Form
     {
+
+        public static User LoggedInUser { get; private set; }
+
         public LoginPanel()
         {
             InitializeComponent();
@@ -26,6 +29,7 @@ namespace SchuhLadenApp
             }
             else
             {
+                LoggedInUser = user;
                 AdminMenu adminMenu = new AdminMenu();
                 this.Hide();
                 adminMenu.ShowDialog();

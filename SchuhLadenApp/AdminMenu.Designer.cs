@@ -33,6 +33,8 @@
             button1 = new Button();
             button2 = new Button();
             button3 = new Button();
+            label1 = new Label();
+            lblLogedInUser = new Label();
             SuspendLayout();
             // 
             // btnAddNewUser
@@ -85,11 +87,32 @@
             button3.UseVisualStyleBackColor = true;
             button3.Click += button3_Click;
             // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(177, 38);
+            label1.Name = "label1";
+            label1.Size = new Size(77, 15);
+            label1.TabIndex = 5;
+            label1.Text = "Logged in as:";
+            // 
+            // lblLogedInUser
+            // 
+            lblLogedInUser.AutoSize = true;
+            lblLogedInUser.Font = new Font("Segoe UI", 25F, FontStyle.Regular, GraphicsUnit.Point);
+            lblLogedInUser.Location = new Point(177, 53);
+            lblLogedInUser.Name = "lblLogedInUser";
+            lblLogedInUser.Size = new Size(83, 46);
+            lblLogedInUser.TabIndex = 6;
+            lblLogedInUser.Text = "user";
+            // 
             // AdminMenu
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(425, 381);
+            Controls.Add(lblLogedInUser);
+            Controls.Add(label1);
             Controls.Add(button3);
             Controls.Add(button2);
             Controls.Add(button1);
@@ -97,7 +120,9 @@
             Controls.Add(btnAddNewUser);
             Name = "AdminMenu";
             Text = "AdminMenu";
+            Load += AdminMenu_Load;
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -107,5 +132,7 @@
         private Button button1;
         private Button button2;
         private Button button3;
+        private Label label1;
+        private Label lblLogedInUser;
     }
 }

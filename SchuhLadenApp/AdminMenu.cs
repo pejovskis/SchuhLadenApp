@@ -15,6 +15,16 @@ namespace SchuhLadenApp
         public AdminMenu()
         {
             InitializeComponent();
+            /*
+            if (LoginPanel.LoggedInUser != null)
+            {
+                lblLogedInUser.Text = LoginPanel.LoggedInUser.getStrasse();
+            }
+            else
+            {
+                lblLogedInUser.Text = "Not logged in";
+            }
+            */
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -55,6 +65,11 @@ namespace SchuhLadenApp
             this.Hide();
             editArticlePanel.ShowDialog();
             this.Close();
+        }
+
+        private void AdminMenu_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

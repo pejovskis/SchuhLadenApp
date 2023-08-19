@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace SchuhLadenApp
 {
-    internal class User
+    public class User
     {
 
         private string UserId;

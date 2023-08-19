@@ -36,6 +36,8 @@
             // 
             // articleShowGrid
             // 
+            articleShowGrid.AllowUserToAddRows = false;
+            articleShowGrid.AllowUserToDeleteRows = false;
             articleShowGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             articleShowGrid.Location = new Point(52, 129);
             articleShowGrid.Name = "articleShowGrid";
