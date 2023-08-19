@@ -12,12 +12,12 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace SchuhLadenApp
 {
-    public partial class editUsersListCell : Form
+    public partial class EditUserInfo : Form
     {
 
         public List<string> userInfo { get; set; } = new List<string>();
 
-        public editUsersListCell(List<string> userInfo)
+        public EditUserInfo(List<string> userInfo)
         {
             this.userInfo = userInfo;
             InitializeComponent();
@@ -27,6 +27,7 @@ namespace SchuhLadenApp
         public void generateUserGridView()
         {
             // Create columns
+            gridCellEdit.Columns.Add("Userid", "Userid");
             gridCellEdit.Columns.Add("Name", "Name");
             gridCellEdit.Columns.Add("Vorname", "Vorname");
             gridCellEdit.Columns.Add("Strasse", "Strasse");
@@ -37,8 +38,16 @@ namespace SchuhLadenApp
             gridCellEdit.Columns.Add("Userstatus", "Userstatus");
             gridCellEdit.Columns.Add("Account", "Account");
 
-            gridCellEdit.Rows.Add(userInfo[1], userInfo[2], userInfo[3], userInfo[4],
+            DataGridViewRow row = new DataGridViewRow();
+
+            row.CreateCells(gridCellEdit, userInfo[0], userInfo[1], userInfo[2], userInfo[3], userInfo[4],
                 userInfo[5], userInfo[6], userInfo[7], userInfo[8], userInfo[9]);
+
+            gridCellEdit.Rows.Add(row);
+
+            row.Cells["Userid"].ReadOnly = true;
+            row.Cells["Userid"].Style.BackColor = Color.Gray;
+            
 
         }
 
@@ -53,11 +62,16 @@ namespace SchuhLadenApp
                 User user = getUserInfo(row);
 
                 tbxInEdit.Text = user.ToString();
-            }
 
+                user.updateUser();
+
+                MessageBox.Show("User " + user.getVorname() + " updated successfully!");
+
+            }
+            
             EditUserPanel editUserPanel = new EditUserPanel();
             this.Hide();
-            editUserPanel.Show();
+            editUserPanel.ShowDialog();
             this.Close();
         }
 
@@ -72,14 +86,20 @@ namespace SchuhLadenApp
             string anstellungszeit = row.Cells[6].Value.ToString();
             double lohngehalt = Convert.ToDouble(row.Cells[7].Value.ToString());
             string userstatus = row.Cells[8].Value.ToString();
-            string password = row.Cells[9].Value.ToString();
-            string account = row.Cells[10].Value.ToString();
+            string account = row.Cells[9].Value.ToString();
 
             User user = new User(userid, name, vorname, strasse, hausnummer, plz,
-                anstellungszeit, lohngehalt, userstatus, password, account);
+                anstellungszeit, lohngehalt, userstatus, account);
 
             return user;
         }
 
+        private void btnBack_Click(object sender, EventArgs e)
+        {
+            EditUserPanel editUserPanel = new EditUserPanel();
+            this.Hide();
+            editUserPanel.ShowDialog();
+            this.Close();
+        }
     }
 }

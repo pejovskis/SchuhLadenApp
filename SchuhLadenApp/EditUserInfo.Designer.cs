@@ -1,6 +1,6 @@
 ﻿namespace SchuhLadenApp
 {
-    partial class editUsersListCell
+    partial class EditUserInfo
     {
         /// <summary>
         /// Required designer variable.
@@ -31,6 +31,7 @@
             tbxInEdit = new TextBox();
             btnSave = new Button();
             gridCellEdit = new DataGridView();
+            btnBack = new Button();
             ((System.ComponentModel.ISupportInitialize)gridCellEdit).BeginInit();
             SuspendLayout();
             // 
@@ -43,11 +44,11 @@
             // 
             // btnSave
             // 
-            btnSave.Location = new Point(349, 250);
+            btnSave.Location = new Point(417, 250);
             btnSave.Name = "btnSave";
-            btnSave.Size = new Size(75, 23);
+            btnSave.Size = new Size(105, 23);
             btnSave.TabIndex = 1;
-            btnSave.Text = "save";
+            btnSave.Text = "update user";
             btnSave.UseVisualStyleBackColor = true;
             btnSave.Click += btnSave_Click;
             // 
@@ -64,15 +65,26 @@
             gridCellEdit.Size = new Size(653, 70);
             gridCellEdit.TabIndex = 2;
             // 
-            // editUsersListCell
+            // btnBack
+            // 
+            btnBack.Location = new Point(303, 250);
+            btnBack.Name = "btnBack";
+            btnBack.Size = new Size(75, 23);
+            btnBack.TabIndex = 3;
+            btnBack.Text = "back";
+            btnBack.UseVisualStyleBackColor = true;
+            btnBack.Click += btnBack_Click;
+            // 
+            // EditUserInfo
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(btnBack);
             Controls.Add(gridCellEdit);
             Controls.Add(btnSave);
             Controls.Add(tbxInEdit);
-            Name = "editUsersListCell";
+            Name = "EditUserInfo";
             Text = "editUsersListCell";
             ((System.ComponentModel.ISupportInitialize)gridCellEdit).EndInit();
             ResumeLayout(false);
@@ -84,5 +96,6 @@
         private TextBox tbxInEdit;
         private Button btnSave;
         private DataGridView gridCellEdit;
+        private Button btnBack;
     }
 }

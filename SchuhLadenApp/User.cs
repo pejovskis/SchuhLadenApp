@@ -40,6 +40,21 @@ namespace SchuhLadenApp
             this.account = account;
             this.password = password;
         }
+
+        public User(string UserId, string name, string vorname, string strasse, string hausnummer, int plz, string anstellungszeit, double lohngehalt, string userStatus, string account)
+        {
+            this.UserId = UserId;
+            this.Name = name;
+            this.Vorname = vorname;
+            this.Strasse = strasse;
+            this.Hausnummer = hausnummer;
+            this.Plz = plz;
+            this.Anstellungszeit = anstellungszeit;
+            this.Lohngehalt = lohngehalt;
+            this.UserStatus = userStatus;
+            this.account = account;
+            this.password = password;
+        }
         public User(string name, string vorname, string strasse, string hausnummer, int plz, string anstellungszeit, double lohngehalt, string userStatus, string password, string account)
         {
             this.Name = name;
@@ -190,6 +205,35 @@ namespace SchuhLadenApp
                     command.Parameters.AddWithValue("@lohngehalt", this.getLohnGehalt());
                     command.Parameters.AddWithValue("@userstatus", this.getUserStatus());
                     command.Parameters.AddWithValue("@password", this.getPassword());
+                    command.Parameters.AddWithValue("@account", this.getAccount());
+
+                    command.ExecuteNonQuery(); // Execute the INSERT query
+                }
+                databaseHelper.CloseConnection(connection);
+            }
+        }
+
+        public void updateUser()
+        {
+            DatabaseHelper databaseHelper = new DatabaseHelper();
+
+            using (SQLiteConnection connection = databaseHelper.OpenConnection())
+            {
+                string query = "UPDATE user SET name=@name, vorname=@vorname, strasse=@strasse, hausnummer=@hausnummer," +
+                    "plz=@plz, anstellungszeit=@anstellungszeit, lohngehalt=@lohngehalt, userstatus=@userstatus, account=@account " +
+                    "WHERE userid=@userid";
+
+                using (SQLiteCommand command = new SQLiteCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@userid", this.getUserId());
+                    command.Parameters.AddWithValue("@name", this.getName());
+                    command.Parameters.AddWithValue("@vorname", this.getVorname());
+                    command.Parameters.AddWithValue("@strasse", this.getStrasse());
+                    command.Parameters.AddWithValue("@hausnummer", this.getHausnummer());
+                    command.Parameters.AddWithValue("@plz", this.getPlz());
+                    command.Parameters.AddWithValue("@anstellungszeit", this.getAnstellungsZeit());
+                    command.Parameters.AddWithValue("@lohngehalt", this.getLohnGehalt());
+                    command.Parameters.AddWithValue("@userstatus", this.getUserStatus());
                     command.Parameters.AddWithValue("@account", this.getAccount());
 
                     command.ExecuteNonQuery(); // Execute the INSERT query
