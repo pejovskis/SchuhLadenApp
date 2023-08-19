@@ -47,7 +47,7 @@ namespace SchuhLadenApp
 
             row.Cells["Userid"].ReadOnly = true;
             row.Cells["Userid"].Style.BackColor = Color.Gray;
-            
+
 
         }
 
@@ -61,14 +61,12 @@ namespace SchuhLadenApp
 
                 User user = getUserInfo(row);
 
-                tbxInEdit.Text = user.ToString();
-
                 user.updateUser();
 
                 MessageBox.Show("User " + user.getVorname() + " updated successfully!");
 
             }
-            
+
             EditUserPanel editUserPanel = new EditUserPanel();
             this.Hide();
             editUserPanel.ShowDialog();
@@ -100,6 +98,11 @@ namespace SchuhLadenApp
             this.Hide();
             editUserPanel.ShowDialog();
             this.Close();
+        }
+
+        private void gridCellEdit_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }

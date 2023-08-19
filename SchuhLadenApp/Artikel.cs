@@ -62,7 +62,7 @@ namespace SchuhLadenApp
 
             using (SQLiteConnection connection = databaseHelper.OpenConnection())
             {
-                string query = "SELECT * FROM articel";
+                string query = "SELECT * FROM artikel";
 
                 using (SQLiteCommand command = new SQLiteCommand(query, connection))
                 {
@@ -139,6 +139,29 @@ namespace SchuhLadenApp
             {
                 string query = "INSERT INTO artikel(artikelid, name, lieferant, preis, menge) " +
                     "VALUES (@artikelid, @name, @lieferant, @preis, @menge) ";
+
+                using (SQLiteCommand command = new SQLiteCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@artikelid", this.getArtikelId());
+                    command.Parameters.AddWithValue("@name", this.getName());
+                    command.Parameters.AddWithValue("@lieferant", this.getLieferant());
+                    command.Parameters.AddWithValue("@preis", this.getPreis());
+                    command.Parameters.AddWithValue("@menge", this.getMenge());
+
+                    command.ExecuteNonQuery(); // Execute the INSERT query
+                }
+                databaseHelper.CloseConnection(connection);
+            }
+        }
+
+        public void updateArticle()
+        {
+            DatabaseHelper databaseHelper = new DatabaseHelper();
+
+            using (SQLiteConnection connection = databaseHelper.OpenConnection())
+            {
+                string query = "UPDATE artikel SET name=@name, lieferant=@lieferant, preis=@preis, menge=@menge" +
+                    "WHERE artikelid=@artikelid";
 
                 using (SQLiteCommand command = new SQLiteCommand(query, connection))
                 {

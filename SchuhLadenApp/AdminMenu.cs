@@ -40,5 +40,21 @@ namespace SchuhLadenApp
             editUserPanel.ShowDialog();
             this.Close();
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            addNewArticlePanel addNewArticlePanel = new addNewArticlePanel();
+            this.Hide();
+            addNewArticlePanel.ShowDialog();
+            this.Close();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            EditArticlePanel editArticlePanel = new EditArticlePanel();
+            this.Hide();
+            editArticlePanel.ShowDialog();
+            this.Close();
+        }
     }
 }

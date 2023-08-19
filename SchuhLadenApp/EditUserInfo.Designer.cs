@@ -28,19 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
-            tbxInEdit = new TextBox();
             btnSave = new Button();
             gridCellEdit = new DataGridView();
             btnBack = new Button();
             ((System.ComponentModel.ISupportInitialize)gridCellEdit).BeginInit();
             SuspendLayout();
-            // 
-            // tbxInEdit
-            // 
-            tbxInEdit.Location = new Point(303, 85);
-            tbxInEdit.Name = "tbxInEdit";
-            tbxInEdit.Size = new Size(171, 23);
-            tbxInEdit.TabIndex = 0;
             // 
             // btnSave
             // 
@@ -64,6 +56,7 @@
             gridCellEdit.SelectionMode = DataGridViewSelectionMode.CellSelect;
             gridCellEdit.Size = new Size(653, 70);
             gridCellEdit.TabIndex = 2;
+            gridCellEdit.CellContentClick += gridCellEdit_CellContentClick;
             // 
             // btnBack
             // 
@@ -83,17 +76,13 @@
             Controls.Add(btnBack);
             Controls.Add(gridCellEdit);
             Controls.Add(btnSave);
-            Controls.Add(tbxInEdit);
             Name = "EditUserInfo";
             Text = "editUsersListCell";
             ((System.ComponentModel.ISupportInitialize)gridCellEdit).EndInit();
             ResumeLayout(false);
-            PerformLayout();
         }
 
         #endregion
-
-        private TextBox tbxInEdit;
         private Button btnSave;
         private DataGridView gridCellEdit;
         private Button btnBack;
